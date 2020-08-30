@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-lazy-init="true">
+
+	<!-- <bean id="SingleOne" class="com.spring.modelbeans.SingerConfigDemo" 
+		p:age="72"> </bean> <bean id="SingleTwo" class="com.spring.modelbeans.SingerConfigDemo" 
+		p:name="Sudeep Patel" p:age="39"> </bean> <bean id="SingerThree" class="com.spring.modelbeans.SingerConfigDemo" 
+		p:name="John Butler"> </bean> -->
+
+	<bean id="shaDigest" class="com.spring.springfactorybean.MessageDigestFactoryBean"
+		p:algorithmName="SHA1" />
+	<bean id="defaultDigest"
+		class="com.spring.springfactorybean.MessageDigestFactoryBean" />
+	<bean id="digester"
+		class="com.spring.springfactorybean.MessageDigester"
+		p:digest1-ref="shaDigest" p:digest2-ref="defaultDigest" />
+</beans>

@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+    
+	    tools {
+	    	jdk "Java-1.8"
+	    	maven "Maven-3.6.2"
+	    }
+    stages {
+        stage('clone sources') {
+            steps {
+                git changelog: true, url: 'https://github.com/sudeep0901/Applications.git'
+            }
+        }
+        stage("chagen dir") {
+        	steps {
+        	        dir('blogapi')
+        	
+        	}
+        	}
+        	
+        stage("Maven builds") {
+        	steps {
+        	         	
+        		bat 'mvn -B -DskipTests clean package'
+        		 
+        	}
+        }
+        stage('Test') {
+            steps {
+                    	dir('blogapi') {
+            
+                bat 'mvn test'
+                }
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+        
+        
+    }
+}
